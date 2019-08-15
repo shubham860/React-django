@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Fetch from './Components/Fetch'
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello Django this is React please use me</h1>
+      <Fetch/>
     </div>
   );
 }
