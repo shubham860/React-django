@@ -6,8 +6,7 @@ class Fetch extends React.Component {
   constructor(){
     super()
     this.state = {
-      firstname : '',
-      lastname : ''
+      x : []
     }
   }
 
@@ -16,25 +15,19 @@ class Fetch extends React.Component {
     axios
        .get(`/employee/`)
        .then(response =>{
-           console.log(response.data)
-           var x = response.data
-          for(let i=0;i<x.length;i++){
-             this.setState({
-               firstname : x[i].firstname,
-               lastname : x[i].lastname
-             })}
+           this.setState({
+             x : response.data
+           })
          })
        .catch(error => {
            alert('Error in fetching data')
          })
   }
+
   render () {
-    const {firstname,lastname} = this.state
+    const {x} = this.state
     return(
      <div class='container'><br/><br/>
-      <div class='row'>
-        <a class="waves-effect waves-light btn-small " onClick={this.fetch}>Fetch</a>
-      </div><br/><br/>
         <div class='row'>
           <table class="responsive-table centered highlight">
             <thead>
@@ -44,12 +37,15 @@ class Fetch extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>{firstname}</td>
-                <td>{lastname}</td>
-              </tr>
+                  {x.map((name,i)=><tr key={i}>
+                  <td>{name.firstname}</td>
+                  <td>{name.lastname}</td>
+                  </tr>)}
             </tbody>
           </table>
+        </div><br/><br/>
+        <div class='row'>
+          <a class="waves-effect waves-light btn-small" onClick={this.fetch}>Fetch</a>
         </div>
       </div>
   )}
